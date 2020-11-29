@@ -2,6 +2,7 @@
  * ARDUINO GATEWAY : create connection between the Pi and the sensors
  */
 
+#include "Adafruit_seesaw.h"
 #include <Servo.h>
 #include <Wire.h>
 
@@ -90,11 +91,16 @@ void requestEvent() {
   }
 }
 
+Adafruit_seesaw ss1;
+Adafruit_seesaw ss2;
+
 void setup() {
   plantServo.attach(9);       // servo uses pin 9
   pinMode(RELAY_PIN,OUTPUT);
   pinMode(SOIL_PIN_A,INPUT);
   pinMode(SOIL_PIN_B,INPUT);
+  ss1.begin(0x36);
+  ss2.begin(0x37);
   
   analogReadResolution(12);   // set the resolution on the arduino due to 12 bit, arm arduino only
                               
